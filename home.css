@@ -1,0 +1,56 @@
+/* General body styling */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+
+/* Header styling */
+.site-header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.site-header h1 {
+    margin: 0;
+}
+
+/* Navigation menu */
+.navigation-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.navigation-menu li {
+    display: inline;
+    margin-left: 20px;
+}
+
+.navigation-menu a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Main content */
+.home-content {
+    padding: 20px;
+}
+
+.features-section ul {
+    list-style-type: square;
+    margin-left: 20px;
+}
+
+/* Footer styling */
+.site-footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
