@@ -1,39 +1,49 @@
-body {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  background-color: #f4f4f4;
-}
-
 .container {
-  width: 80%;
-  margin: 20px auto;
-  background: white;
-  padding: 20px;
+  padding: 24px;
+  background: #f8f9fa;
+  border-radius: 4px;
+  max-width: 600px;
+  margin: 8px auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
-h1 {
-  text-align: center;
+.container h1 {
+  color: #343a40;
 }
-
-.btn {
+.container .btn, .container .users-list .user-item .btn:last-child {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 8px;
   background-color: #007bff;
   color: white;
-  padding: 10px;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  border-radius: 4px;
   text-decoration: none;
-  display: inline-block;
-  margin: 10px 0;
-
-  &:hover {
-    background-color: #0056b3;
-  }
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+.container .btn.danger, .container .users-list .user-item .btn:last-child {
+  background-color: #dc3545;
+}
+.container .btn:hover, .container .users-list .user-item .btn:hover:last-child {
+  background-color: #0062cc;
+}
+.container .btn:focus, .container .users-list .user-item .btn:focus:last-child {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+}
+.container .users-list .user-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+.container .users-list .user-item span {
+  color: #343a40;
 }
 
-.users-list .user-item {
-  background-color: #eee;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-}
+/*# sourceMappingURL=manageUsers.css.map */

@@ -1,0 +1,72 @@
+// Variables for colors, spacing, and typography
+$primary-color: #007bff; // A friendly blue for primary actions
+$danger-color: #dc3545; // Red for destructive actions like 'Delete'
+$background-color: #f8f9fa; // Light grey for background
+$text-color: #343a40; // Dark grey for text
+$font-stack: 'Segoe UI', 'Helvetica Neue', sans-serif;
+$border-radius: 4px;
+$base-spacing: 8px;
+
+.container {
+  padding: 3 * $base-spacing;
+  background: $background-color;
+  border-radius: $border-radius;
+  max-width: 600px;
+  margin: $base-spacing auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    color: $text-color;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: $base-spacing $base-spacing * 2;
+    margin: $base-spacing;
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: $border-radius;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+
+    &.danger {
+      background-color: $danger-color;
+    }
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba($primary-color, 0.5);
+    }
+  }
+
+  .users-list {
+    .user-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: $base-spacing;
+      background: white;
+      border: 1px solid #dee2e6;
+      border-radius: $border-radius;
+      margin-top: $base-spacing;
+
+      span {
+        color: $text-color;
+      }
+
+      .btn {
+        &:last-child {
+          @extend .btn;
+          @extend .danger; // Apply the 'danger' style modifications
+        }
+      }
+    }
+  }
+}

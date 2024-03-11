@@ -1,56 +1,86 @@
-/* General body styling */
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-/* Header styling */
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Roboto", sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+}
+
 .site-header {
-    background-color: #333;
-    color: #fff;
-    padding: 1rem 0;
-    text-align: center;
+  background: #3498db;
+  color: #fff;
+  padding: 1rem 0;
 }
-
 .site-header h1 {
-    margin: 0;
+  margin: 0;
+  padding: 0 2rem;
+}
+.site-header .navigation-menu {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+.site-header .navigation-menu li {
+  margin: 0 1rem;
+}
+.site-header .navigation-menu li a {
+  color: #fff;
+  text-decoration: none;
+}
+.site-header .navigation-menu li a:hover, .site-header .navigation-menu li a:focus {
+  color: #217dbb;
 }
 
-/* Navigation menu */
-.navigation-menu {
-    list-style: none;
-    padding: 0;
-}
-
-.navigation-menu li {
-    display: inline;
-    margin-left: 20px;
-}
-
-.navigation-menu a {
-    color: #fff;
-    text-decoration: none;
-}
-
-/* Main content */
 .home-content {
-    padding: 20px;
+  padding: 2rem;
+}
+.home-content .welcome-section,
+.home-content .features-section {
+  margin-bottom: 2rem;
+}
+.home-content .welcome-section h2, .home-content .welcome-section h3,
+.home-content .features-section h2,
+.home-content .features-section h3 {
+  color: #3498db;
+}
+.home-content .features-section ul {
+  list-style: none;
+  padding-left: 0;
+}
+.home-content .features-section ul li {
+  padding-left: 1.5rem;
+  position: relative;
+}
+.home-content .features-section ul li:before {
+  content: "";
+  background-color: #ffc107;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
 }
 
-.features-section ul {
-    list-style-type: square;
-    margin-left: 20px;
-}
-
-/* Footer styling */
 .site-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
 }
+.site-footer p {
+  margin: 0;
+}
+
+/*# sourceMappingURL=home.css.map */

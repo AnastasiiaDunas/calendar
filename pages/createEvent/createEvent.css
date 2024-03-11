@@ -1,37 +1,55 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    padding: 20px;
-}
-
 .container {
-    background: white;
-    width: 80%;
-    margin: 20px auto;
-    padding: 20px;
+  padding: 40px;
+  background: white;
+  border-radius: 4px;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.container h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 50px;
+}
+.container .event-form {
+  display: flex;
+  flex-direction: column;
+}
+.container .event-form input[type=text],
+.container .event-form input[type=date],
+.container .event-form textarea {
+  padding: 10px;
+  margin-bottom: 30px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+.container .event-form input[type=text]:focus,
+.container .event-form input[type=date]:focus,
+.container .event-form textarea:focus {
+  border-color: #3d8b40;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+.container .event-form textarea {
+  resize: vertical;
+  height: 100px;
+}
+.container .event-form .btn {
+  padding: 15px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.container .event-form .btn:hover {
+  background-color: #3d8b40;
+}
+.container .event-form .btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.4);
 }
 
-.event-form {
-    display: flex;
-    flex-direction: column;
-}
-
-.event-form input[type="text"],
-.event-form input[type="date"],
-.event-form textarea,
-.event-form button {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-.event-form button {
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-}
-
-.event-form button:hover {
-    background-color: #0056b3;
-}
+/*# sourceMappingURL=createEvent.css.map */
