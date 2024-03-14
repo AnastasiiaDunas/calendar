@@ -1,0 +1,297 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  color: #212121;
+  background-color: #fafafa;
+  min-height: 100vh;
+}
+
+.site-header {
+  background-color: #00796b;
+  padding: 20px;
+  text-align: center;
+}
+.site-header h1 {
+  color: #fafafa;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+.site-header nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+.site-header nav ul li {
+  margin: 0 10px;
+}
+.site-header nav ul li a {
+  text-decoration: none;
+  color: #fafafa;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.site-header nav ul li a:hover {
+  background-color: #00ac98;
+}
+.site-header nav ul li a.active {
+  background-color: #00ac98;
+}
+
+.home-content {
+  padding: 20px;
+  text-align: center;
+}
+.home-content .welcome-section {
+  margin-bottom: 40px;
+}
+.home-content .welcome-section h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+.home-content .welcome-section p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+.home-content .welcome-section .calendar-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.home-content .features-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+.home-content .features-section ul {
+  list-style: none;
+  text-align: center;
+}
+.home-content .features-section ul li {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.site-footer {
+  background-color: #00796b;
+  color: #fafafa;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+h1 {
+  text-align: center;
+  margin: 20px 0;
+}
+
+form {
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+input[type=text],
+input[type=password],
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+button {
+  background-color: #00796b;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  background-color: #00463e;
+}
+
+a {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.card {
+  background-color: #00796b;
+  color: #ff9800;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.card h2,
+.card p {
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.error-message {
+  text-align: center;
+  color: #ff9800;
+}
+.error-message h2 {
+  margin-bottom: 10px;
+  color: black;
+}
+.error-message button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00796b;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.error-message button:hover {
+  background-color: #00463e;
+}
+
+.center div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-button {
+  padding: 5px 10px;
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.delete-button:hover {
+  background-color: #b30000;
+}
+
+/* Styles for success message */
+.success-message {
+  background-color: #4caf50; /* Green */
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Styles for error message */
+.error-message {
+  background-color: #f44336; /* Red */
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  z-index: 1000;
+  width: fit-content;
+}
+
+.success {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.error {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.hidden {
+  display: none;
+}
+
+.event-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.event-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.event-form input[type=text],
+.event-form input[type=datetime-local],
+.event-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+.event-form button[type=submit] {
+  width: 100%;
+  padding: 10px;
+  background-color: #00796b;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.event-form button[type=submit]:hover {
+  background-color: #00534a;
+}
+
+/*# sourceMappingURL=all.css.map */

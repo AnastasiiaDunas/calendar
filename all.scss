@@ -1,0 +1,395 @@
+// Define color variables for easy customization and accessibility
+$primary-color: #00796b; // Main color for links and accents
+$secondary-color: #ff9800; // Secondary color for alerts and highlights
+$text-color: #212121; // Main text color
+$background-color: #fafafa; // Background color
+$text-color1: #fff;
+
+// Define font variables for consistency and accessibility
+$main-font: "Roboto", sans-serif;
+
+// Define breakpoints for responsive design
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// General resets and global styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px; // Base font size
+}
+
+body {
+  font-family: $main-font;
+  color: $text-color;
+  background-color: $background-color;
+  min-height: 100vh;
+}
+
+// Header styles
+.site-header {
+  background-color: $primary-color;
+  padding: 20px;
+  text-align: center;
+
+  h1 {
+    color: $background-color;
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  nav {
+    ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+
+      li {
+        margin: 0 10px;
+
+        a {
+          text-decoration: none;
+          color: $background-color;
+          padding: 5px 10px;
+          border-radius: 5px;
+
+          &:hover {
+            background-color: lighten($primary-color, 10%);
+          }
+          &.active {
+            background-color: lighten($primary-color, 10%);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Main content styles
+.home-content {
+  padding: 20px;
+  text-align: center;
+
+  .welcome-section {
+    margin-bottom: 40px;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .calendar-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .features-section {
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style: none;
+      text-align: center;
+
+      li {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+// Footer styles
+.site-footer {
+  background-color: $primary-color;
+  color: $background-color;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+h1 {
+  text-align: center;
+  margin: 20px 0;
+}
+
+form {
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+input[type="text"],
+input[type="password"],
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+button {
+  background-color: $primary-color;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+a {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); // 3 columns with equal width
+  gap: 20px;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.card {
+  background-color: $primary-color;
+  color: $secondary-color;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  h2,
+  p {
+    margin-bottom: 10px;
+    color: $text-color1; // Text color for card content
+  }
+}
+
+.error-message {
+  text-align: center;
+  color: $secondary-color;
+  h2 {
+    margin-bottom: 10px;
+    color: black; // Text color for card content
+  }
+  button {
+    display: flex;
+    align-items: center; // Centers vertically
+    justify-content: center;
+    background-color: $primary-color;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+}
+
+.center {
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; // Centers horizontally
+    align-items: center; // Centers vertically
+  }
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-button {
+  padding: 5px 10px;
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.delete-button:hover {
+  background-color: #b30000;
+}
+
+/* Styles for success message */
+.success-message {
+  background-color: #4caf50; /* Green */
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Styles for error message */
+.error-message {
+  background-color: #f44336; /* Red */
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  z-index: 1000;
+  width: fit-content;
+}
+
+.success {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.error {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.hidden {
+  display: none;
+}
+
+.event-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  input[type="text"],
+  input[type="datetime-local"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #00796b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #00534a;
+    }
+  }
+}
+
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Login form styles */
+.login-form {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  text-align: center;
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: $primary-color;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+    color: $text-color;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  button[type="submit"] {
+    background-color: $primary-color;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Event</title>
+    <link rel="stylesheet" href="../all.css" />
+</head>
+<body>
+<header class="site-header">
+    <!-- Header section containing the site title and navigation -->
+    <h1>Event Calendar Service</h1>
+    <nav>
+        <ul class="navigation-menu">
+            <li><a href="./home.html">Home</a></li>
+            <li><a href="./viewEvents">View Events</a></li>
+            <li><a href="" class="active">Create Event</a></li>
+            <li><button id="logout-button">Logout</button></li>
+        </ul>
+    </nav>
+</header>
+<div id="error-window" class="center"></div>
+
+<div id="create-event-form">
+    <div class="container">
+      <div id="success-notification" class="notification success hidden"></div>
+      <div id="error-notification" class="notification error hidden"></div>
+        <h1>Create New Event</h1>
+        <form id="event-submit-form"
+              class="event-form"
+              method="POST"
+              action="http://127.0.0.1:8000/event/create/"
+        >
+            <label for="title">Title:</label>
+            <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    required
+            />
+            <label for="description">Description:</label>
+            <input
+                    id="description"
+                    name="description"
+                    required
+            ></input>
+            <label for="date">Date & Time:</label>
+            <input
+                    type="datetime-local"
+                    id="date"
+                    name="date"
+                    required
+            />
+            <button type="submit">Create Event</button>
+        </form>
+    </div>
+</div>
+
+
+<footer class="site-footer">
+    <p>&copy; 2024 Event Calendar Service. All rights reserved.</p>
+</footer>
+
+<!-- Notification placeholders -->
+
+
+<script>
+    const authToken = sessionStorage.getItem("authToken");
+
+    const EventSubmit = document.getElementById("event-submit-form");
+    EventSubmit.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+        const date = document.getElementById("date").value;
+
+        fetch("http://127.0.0.1:8000/event/create/", {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${authToken}`,
+            },
+            body: JSON.stringify({
+                title,
+                description,
+                date,
+            }),
+        })
+        .then((response) => {
+            if (response.status === 401) {
+                throw new Error("Authentication required");
+            }
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            showSuccessNotification("Event created successfully");
+        })
+        .catch((error) => {
+            console.error("Error during request:", error);
+            showErrorNotification("Failed to create event");
+        });
+    });
+
+    // Function to show success notification
+    function showSuccessNotification(message) {
+        const successNotification = document.getElementById("success-notification");
+        successNotification.textContent = message;
+        successNotification.classList.remove("hidden");
+        setTimeout(() => {
+            successNotification.classList.add("hidden");
+        }, 3000); // Hide notification after 3 seconds
+    }
+
+    // Function to show error notification
+    function showErrorNotification(message) {
+        const errorNotification = document.getElementById("error-notification");
+        errorNotification.textContent = message;
+        errorNotification.classList.remove("hidden");
+        setTimeout(() => {
+            errorNotification.classList.add("hidden");
+        }, 3000); // Hide notification after 3 seconds
+    }
+
+    const logoutButton = document.getElementById("logout-button");
+
+// Add click event listener to the logout button
+logoutButton.addEventListener("click", () => {
+  // Clear the session storage
+  sessionStorage.clear();
+
+  // Redirect to the login page
+  window.location.href = "../login";
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="../all.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <!-- Header section containing the site title and navigation -->
+      <h1>Event Calendar Service</h1>
+      <nav>
+        <ul class="navigation-menu">
+          <li><a href="" class="active">Home</a></li>
+          <li><a href="./viewEvents">View Events</a></li>
+          <li><a href="./createEvent">Create Event</a></li>
+          <li><button id="logout-button">Logout</button></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="home-content">
+      <!-- Main content section -->
+      <section class="welcome-section">
+        <!-- Section welcoming users and providing information about the service -->
+        <h2>Welcome to Your Event Calendar</h2>
+        <p>
+          Organize and share your events effortlessly. Keep track of all your
+          important dates and never miss a thing!
+        </p>
+        <p>
+          Our event calendar service is designed to simplify event management
+          for individuals and organizations alike. Whether you're planning a
+          small gathering or a large-scale event, we've got you covered.
+        </p>
+        <img
+          src="https://via.placeholder.com/400"
+          alt="Event Calendar Image"
+          class="calendar-image"
+        />
+      </section>
+      <section class="features-section">
+        <!-- Section highlighting the features of the service -->
+        <h3>Features:</h3>
+        <ul>
+          <li>Create and edit events with ease.</li>
+          <li>View upcoming and past events in a comprehensive calendar.</li>
+          <li>Sync your calendar with other devices and platforms.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; 2024 Event Calendar Service. All rights reserved.</p>
+    </footer>
+
+    <script>
+      const authToken = sessionStorage.getItem("authToken");
+
+      if (authToken) {
+        fetch("http://127.0.0.1:8000/events/created/", {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              // Handle potential 401 (Unauthorized) error here
+              throw new Error("Authorization failed");
+            }
+            return response.json();
+          })
+          .catch((error) => {
+            console.error("Error fetching events:", error);
+          });
+      } else {
+        // Assuming this 'else' refers to the 'if (!response.ok)' check
+        const eventList = document.getElementById("event-list");
+        const messageDiv = document.createElement("div");
+        messageDiv.innerHTML = `
+        <h2>Not authorized to view content</h2>
+        <button><a href="../../login">Login</a></button>
+      `;
+        eventList.appendChild(messageDiv); // Append the message
+      }
+
+      const logoutButton = document.getElementById("logout-button");
+
+// Add click event listener to the logout button
+logoutButton.addEventListener("click", () => {
+  // Clear the session storage
+  sessionStorage.clear();
+
+  // Redirect to the login page
+  window.location.href = "../login";
+});
+    </script>
+  </body>
+</html>

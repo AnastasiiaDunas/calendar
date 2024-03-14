@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Created Events</title>
+    <link rel="stylesheet" href="../../all.css" />
+</head>
+<body>
+<header class="site-header">
+    <h1>Event Calendar Service</h1>
+    <nav>
+        <ul class="navigation-menu">
+            <li><a href="./home">Home</a></li>
+            <li><a href="" class="active">View Events</a></li>
+            <li><a href="./createEvent">Create Event</a></li>
+            <li><button id="logout-button">Logout</button></li>
+        </ul>
+    </nav>
+</header>
+<div id="success-notification" class="notification success hidden"></div>
+<div id="error-notification" class="notification error hidden"></div>
+<h1>Created Events</h1>
+<div id="event-list" class="card-container"></div>
+<div id="error-window" class="center"></div>
+
+<div id="edit-dialog" class="modal">
+    <div class="modal-content">
+        <h1>Edit Event</h1>
+        <form id="event-edit-form"
+              class="event-form"
+              method="PUT"
+              action=""
+        >
+            <label for="title">ID:</label>
+            <input
+                    type="text"
+                    id="id"
+                    name="id"
+                    required
+            />
+            <label for="title">Title:</label>
+            <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    required
+            />
+            <label for="description">Description:</label>
+            <input
+                    id="description"
+                    name="description"
+                    required
+            ></input>
+            <label for="date">Date & Time:</label>
+            <input
+                    type="datetime-local"
+                    id="date"
+                    name="date"
+                    required
+            />
+            <button type="submit">Submit</button>
+        </form>
+        
+    </div>
+</div>
+
+<footer class="site-footer">
+    <p>&copy; 2024 Event Calendar Service. All rights reserved.</p>
+</footer>
+
+<script>
+    const authToken = sessionStorage.getItem("authToken");
+
+    if (authToken) {
+        fetch("http://127.0.0.1:8000/events/created/", {
+            headers: {
+                Authorization: `Bearer ${authToken}`,
+            },
+        })
+            .then((response) => {
+                if (!response.ok) {
+
+                    throw new Error("Authorization failed");
+                }
+                return response.json();
+            })
+            .then((events) => {
+                const eventList = document.getElementById("event-list");
+                events.forEach((event) => {
+                    const eventItem = document.createElement("div");
+                    eventItem.classList.add("card");
+                    eventItem.innerHTML = `
+                            <h2>${event.title}</h2>
+                            <p>Date: ${event.date}</p>
+                            <p>${event.description}</p>
+                            <p>id:${event.id}</p>
+                            <div class="button-container">
+                              <button class="delete-button" data-id="${event.id}">Delete</button>
+                            </div>
+                          `;
+                    eventList.appendChild(eventItem);
+                });
+
+                const deleteButtons = document.querySelectorAll(".delete-button");
+                deleteButtons.forEach((button) => {
+                    button.addEventListener("click", (event) => {
+                        const eventId = event.target.dataset.id;
+                        deleteEvent(eventId);
+                    });
+                });
+            })
+            .catch((error) => {
+                console.error("Error fetching events:", error);
+            });
+    } else {
+
+        const errorwindow = document.getElementById("error-window");
+        const messageDiv = document.createElement("div");
+        messageDiv.innerHTML = `
+              <div class="error-message"><h2>Not authorized to view content</h2>
+            <button><a href="../../login">Login</a></button>
+                </div>
+
+          `;
+        errorwindow.appendChild(messageDiv);
+    }
+
+
+    const editForm = document.getElementById("event-edit-form");
+    editForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const id = document.getElementById("id").value;
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+        const date = document.getElementById("date").value;
+
+        fetch(`http://127.0.0.1:8000/event/update/${id}/`, {
+            method: "PUT",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${authToken}`,
+            },
+            body: JSON.stringify({
+                id,
+                title,
+                description,
+                date,
+            }),
+        })
+            .then((response) => {
+                if (response.status === 401) {
+                    throw new Error("Authentication required");
+                }
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                // If update successful, fetch updated events and render them
+                return fetch("http://127.0.0.1:8000/events/created/", {
+                    headers: {
+                        Authorization: `Bearer ${authToken}`,
+                    },
+                });
+            })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to fetch updated events");
+                }
+                return response.json();
+            })
+            .then((events) => {
+                // Clear existing event list
+                const eventList = document.getElementById("event-list");
+                eventList.innerHTML = '';
+
+                // Render updated events
+                events.forEach((event) => {
+                    const eventItem = document.createElement("div");
+                    eventItem.classList.add("card");
+                    eventItem.innerHTML = `
+                        <h2>${event.title}</h2>
+                        <p>Date: ${event.date}</p>
+                        <p>${event.description}</p>
+                        <p>id:${event.id}</p>
+                        <div class="button-container">
+                            <button class="delete-button" data-id="${event.id}">Delete</button>
+                        </div>
+                    `;
+                    eventList.appendChild(eventItem);
+                });
+
+                // Attach event listeners to delete buttons
+                const deleteButtons = document.querySelectorAll(".delete-button");
+                deleteButtons.forEach((button) => {
+                    button.addEventListener("click", (event) => {
+                        const eventId = event.target.dataset.id;
+                        deleteEvent(eventId);
+                    });
+                });
+
+                // Show success notification
+                showSuccessNotification("Event updated successfully", "success");
+            })
+            .catch((error) => {
+                console.error("Error during request:", error);
+                // Show error notification
+                showErrorNotification("Failed to update event", "error");
+            });
+    });
+
+
+    function deleteEvent(eventId) {
+        fetch(`http://127.0.0.1:8000/event/delete/${eventId}/`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${authToken}`,
+            },
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to delete event");
+                }
+                // Remove the event card from the UI
+                const eventCard = document
+                    .querySelector(`[data-id="${eventId}"]`)
+                    .closest(".card");
+                eventCard.remove();
+                // Show success notification
+                showSuccessNotification("Event deleted successfully", "success");
+            })
+            .catch((error) => {
+                console.error("Error deleting event:", error);
+                // Show error notification
+                showErrorNotification("Failed to delete event", "error");
+            });
+    }
+
+    function showSuccessNotification(message) {
+        const successNotification = document.getElementById("success-notification");
+        successNotification.textContent = message;
+        successNotification.classList.remove("hidden");
+        setTimeout(() => {
+            successNotification.classList.add("hidden");
+        }, 3000); // Hide notification after 3 seconds
+    }
+
+    // Function to show error notification
+    function showErrorNotification(message) {
+        const errorNotification = document.getElementById("error-notification");
+        errorNotification.textContent = message;
+        errorNotification.classList.remove("hidden");
+        setTimeout(() => {
+            errorNotification.classList.add("hidden");
+        }, 3000); // Hide notification after 3 seconds
+    }
+
+    // Get the logout button element
+const logoutButton = document.getElementById("logout-button");
+
+// Add click event listener to the logout button
+logoutButton.addEventListener("click", () => {
+  // Clear the session storage
+  sessionStorage.clear();
+
+  // Redirect to the login page
+  window.location.href = "../login";
+});
+
+</script>
+</body>
+</html>
