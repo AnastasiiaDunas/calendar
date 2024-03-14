@@ -12,7 +12,7 @@
             <li><a href="./home">Home</a></li>
             <li><a href="" class="active">View Events</a></li>
             <li><a href="./createEvent">Create Event</a></li>
-            <li><button id="logout-button">Logout</button></li>
+            <li><button id="authButton">Login</button></li>
         </ul>
     </nav>
 </header>
@@ -254,17 +254,40 @@
         }, 3000); // Hide notification after 3 seconds
     }
 
-    // Get the logout button element
-const logoutButton = document.getElementById("logout-button");
 
-// Add click event listener to the logout button
-logoutButton.addEventListener("click", () => {
-  // Clear the session storage
-  sessionStorage.clear();
 
-  // Redirect to the login page
-  window.location.href = "../login";
-});
+function login() {
+        // Redirect to the login page
+        window.location.href = "../login"; // Change to your login page URL
+      }
+
+      function logout() {
+        // Clear authToken from session storage and redirect to login page
+        sessionStorage.removeItem("authToken");
+        window.location.href = "../login"; // Change to your login page URL
+      }
+
+      function checkAuthToken() {
+        console.log("Checking authToken");
+        const authToken = sessionStorage.getItem("authToken");
+        const authButton = document.getElementById("authButton");
+
+        if (authToken) {
+          console.log("Auth token found");
+          authButton.textContent = "Logout";
+          authButton.removeEventListener("click", login);
+          authButton.addEventListener("click", logout);
+        } else {
+          console.log("Auth token not found");
+          authButton.textContent = "Login";
+          authButton.removeEventListener("click", logout);
+          authButton.addEventListener("click", login); // Add this line to ensure login function is attached
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        checkAuthToken();
+      });
 
 </script>
 </body>
